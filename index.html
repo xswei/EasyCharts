@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href=".\css\style.css">
+	<script src=".\libs\d3.v4.js"></script>
+	<script src=".\libs\topojson.v1.min.js"></script>
+	<script src=".\libs\jquery-2.1.4.js"></script>
+	<script src=".\script\script.js"></script>
+	<script src=".\script\A.js"></script>
+	<script src=".\script\B.js"></script>
+	<script src=".\script\C.js"></script>
+	<script src=".\script\D.js"></script>
+	<script src=".\script\control.js"></script>
+	<script src=".\script\company.js"></script>
+</head>
+<body>
+	<div id="tip_information">
+		<div class="tip_title" style="text-align:center"></div>
+		<div class="time"></div>
+		<div class="jiangshuiliang">
+			<span style="font-weight:bold">降水量 : </span>
+			<span class="value"></span>
+		</div>
+	</div>
+	<div id="tip_company">
+		<div class="tip_title" style="text-align:center"></div>
+		<div class="time"></div>
+		<div class="value">
+			<span class="name" style="font-weight:bold"></span>
+			<span class="value"></span>
+		</div>
+		<div class="jiancedian">
+			<span style="font-weight:bold">监测点:</span>
+			<span class="jiancedianName"></span>
+		</div>
+	</div>
+	<div class="main">
+		<div class="context">
+			<div class="left">
+				<div class="A">
+					<div class="left_graph">
+						<div class="left_title">
+							山东省县级城市实时降水量(mm)
+						</div>
+						<div class="left_wrap div_A">
+							<div style="position:absolute;width:100%;height:100%;display:none"><svg width="100%" style="position:absolute" height="100%" id="svg_A_grad"></svg>
+							</div>
+							<div style="position:absolute;width:100%;height:100%;z-index:100;">
+								<svg width="100%" height="100%" id="svg_A_map"></svg>
+							</div>
+							<div class="showBig" style="position:absolute;right:10px;bottom:30px;color:#ccc;z-index:200">
+								<input id="showBig_A" type="radio" name="big"  onchange="changeBigShow()" class="bigShow" > 放大展示
+							</div>
+						</div>
+					</div>
+					<div class="left_side">
+						<svg id="side_A" width="100%" height="100%">
+							<defs>
+								<linearGradient id="linearGradient_A" x2="0%" y2="0%" x1="0%" y1="100%">
+								</linearGradient>
+							</defs>
+						</svg>
+					</div>
+					
+				</div>
+					<div class="B"><div class="left_graph">
+						<div class="left_title">
+							山东省城市实时风速风向状况
+						</div>
+						<div class="left_wrap div_B">
+							<div style="position:absolute;width:100%;height:100%;display:none"><svg width="100%" style="position:absolute" height="100%" id="svg_B_grad"></svg>
+							</div>
+							<div style="position:absolute;width:100%;height:100%;">
+								<canvas id="canvas_B"></canvas>
+							</div>
+							<div style="position:absolute;width:100%;height:100%;z-index:100;">
+								<svg width="100%" height="100%" id="svg_B_map"></svg>
+							</div>
+							<div class="showBig" style="position:absolute;right:10px;bottom:30px;color:#ccc;z-index:200">
+								<input id="showBig_B" type="radio" name="big" onchange="changeBigShow()" class="bigShow" > 放大展示
+							</div>
+						</div>
+					</div>
+					<div class="left_side">
+						<svg id="side_B" width="100%" height="100%">
+							<defs>
+								<linearGradient id="linearGradient_B" x2="0%" y2="0%" x1="0%" y1="100%">
+								</linearGradient>
+							</defs>
+						</svg>
+					</div>
+					
+				</div>
+				<div class="C">
+					<div class="left_graph">
+						<div class="left_title">
+							山东省城市实时空气质量AQI分布
+						</div>
+						<div class="left_wrap div_C">
+							<div style="position:absolute;width:100%;height:100%;display:none"><svg width="100%" style="position:absolute" height="100%" id="svg_C_grad"></svg>
+							</div>
+							<div style="position:absolute;width:100%;height:100%;">
+								<canvas id="canvas_C"></canvas>
+							</div>
+							<div style="position:absolute;width:100%;height:100%;z-index:100;">
+								<svg width="100%" height="100%" id="svg_C_map"></svg>
+							</div>
+							<div class="showBig" style="position:absolute;right:10px;bottom:30px;color:#ccc;z-index:200">
+								<input id="showBig_C" checked type="radio" name="big"  onchange="changeBigShow()" class="bigShow" > 放大展示
+							</div>
+						</div>
+					</div>
+					<div class="left_side">
+						<svg id="side_C" width="100%" height="100%">
+							<defs>
+								<linearGradient id="linearGradient_C" x2="0%" y2="0%" x1="0%" y1="100%">
+								</linearGradient>
+							</defs>
+						</svg>
+					</div>
+					
+				</div>
+			</div>
+			<div class="right">
+				<div class="D">
+					<div class="right_title">
+						山东省污染排放企业的监测站点监测项目结果
+					</div>
+					<div style="height:3%"></div>
+					<div class="right_wrap div_D">
+					<div style="position:absolute;width:100%;height:100%">
+						<svg width="100%" style="position:absolute" height="100%" id="svg_D_grad"></svg>
+							</div>
+							<div style="position:absolute;width:100%;height:100%;">
+								<canvas id="canvas_D"></canvas>
+							</div>
+							<div style="position:absolute;width:100%;height:100%;z-index:100;">
+								<svg width="100%" height="100%" id="svg_D_map">
+									<g id="company_g"></g>
+								</svg>
+							</div>
+							<div class="right_tip" style="position:absolute;width:8%;height:30%;right:30px;bottom:30px;color:white;background:black;z-index:200">
+								<svg id="side_D" width="100%" height="100%">
+								<defs>
+									<linearGradient id="linearGradient_D" x2="0%" y2="0%" x1="0%" y1="100%">
+									</linearGradient>
+								</defs>
+								</svg>
+							</div>
+							<div class="right_tip" style="position:absolute;width:15%;right:10px;top:10px;background:black;color:white;z-index:500">
+								<div>项目</div>
+								
+								<table style="margin:10px">
+									<tr>
+										<td><input id="o2" name="type" checked type="radio"onchange="clickRadio(this)"></td>
+										<td>化学需氧量</td>
+									</tr>
+									<tr>
+										<td><input id="nh" name="type" type="radio" onchange="clickRadio(this)"></td>
+										<td>氨氮</td>
+									</tr>
+								</table>
+							</div>
+					</div>
+					<div class="right_foot">
+						<div id="time_table">
+							<br>
+							<table>
+								<tr>
+									<td><div>
+										<div><input type="range" value="1" step="1" id="dateRange" min="1" max="30" onchange="changeDate()"></div>
+										<div>
+											<svg id="timeTick" height="20" width="100"></svg>
+										</div>
+									</div></td>
+								</tr>
+							</table>
+						</div>					
+						<div id="theme">
+							By:<br>&nbsp;&nbsp;卫学仕<br>&nbsp;&nbsp;张&nbsp;杰
+							<!-- <table>
+								<tr><input type="radio" id="themeLight" name="theme" onchange="changeTheme()">白色</tr>
+								<br>
+								<br>
+								<tr><input type="radio" id="themeDark" name="theme" onchange="changeTheme()">黑色</tr>
+							</table> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
